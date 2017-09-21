@@ -1,6 +1,7 @@
 package com.sheefee.simple.sso.client.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,19 +16,20 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
-public class AuthUtil {
+public class HTTPUtil {
 	/**
 	 * 向目标url发送post请求
 	 * 
 	 * @author sheefee
 	 * @date 2017年9月12日 下午5:10:36
 	 * @param url
-	 * @return
+	 * @param params
+	 * @return boolean
 	 */
 	public static boolean post(String url, Map<String, String> params) {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		HttpPost httpPost = new HttpPost(url);
-		// 参数
+		// 参数处理
 		if (params != null && !params.isEmpty()) {
 			List<NameValuePair> list = new ArrayList<NameValuePair>();
 			
@@ -39,7 +41,7 @@ public class AuthUtil {
 			
 			httpPost.setEntity(new UrlEncodedFormEntity(list, Consts.UTF_8));
 		}
-
+		// 执行请求
 		try {
 			CloseableHttpResponse response = httpclient.execute(httpPost);
 			response.getStatusLine().getStatusCode();
@@ -47,5 +49,12 @@ public class AuthUtil {
 			e.printStackTrace();
 		}
 		return true;
+	}
+	
+	// 测试
+	public static void main(String[] args) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("clientUrl", "httputil");
+		post("http://sheefee.com:8080/", params);
 	}
 }
