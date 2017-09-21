@@ -26,22 +26,15 @@ public class AuthFilter implements Filter{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
-		
 		String uri = request.getRequestURI();
-		// 注销请求，放行
-		if ("/logout".equals(uri)) {
-			chain.doFilter(req, res);
-			return;
-		}
 		
 		// 已经登录，放行
 		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
 			// 如果是客户端发起的登录请求，跳转回客户端，并附带token
 			String clientUrl = request.getParameter(AuthConst.CLIENT_URL);
 			if (clientUrl != null && !"".equals(clientUrl)) {
-//				// 存储token与客户端url的关联关系
-//				authService.register(token, clientUrl);
-//				return "redirect:" + clientUrl + "?" + AuthConst.TOKEN + "=" + token;
+				response.sendRedirect(clientUrl + "?" + AuthConst.TOKEN + "=" + session.getAttribute(AuthConst.TOKEN));
+				return;
 			}
 			if (!"/success".equals(uri)) {
 				response.sendRedirect("/success");
