@@ -36,6 +36,13 @@ public class AuthFilter implements Filter{
 		
 		// 已经登录，放行
 		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
+			// 如果是客户端发起的登录请求，跳转回客户端，并附带token
+			String clientUrl = request.getParameter(AuthConst.CLIENT_URL);
+			if (clientUrl != null && !"".equals(clientUrl)) {
+//				// 存储token与客户端url的关联关系
+//				authService.register(token, clientUrl);
+//				return "redirect:" + clientUrl + "?" + AuthConst.TOKEN + "=" + token;
+			}
 			if (!"/success".equals(uri)) {
 				response.sendRedirect("/success");
 				return;

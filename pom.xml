@@ -17,7 +17,8 @@
 	<modules>
 		<module>simple-sso-client</module>
 		<module>simple-sso-server</module>
-		<module>simple-sso-test</module>
+		<module>simple-sso-subsysa</module>
+		<module>simple-sso-subsysb</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>

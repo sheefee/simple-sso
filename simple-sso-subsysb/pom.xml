@@ -8,9 +8,9 @@
 		<artifactId>simple-sso</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>simple-sso-test</artifactId>
+	<artifactId>simple-sso-subsysb</artifactId>
 	<packaging>war</packaging>
-	<name>simple-sso-test</name>
+	<name>simple-sso-subsysb</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -45,6 +45,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>simple-sso-test</finalName>
+		<finalName>simple-sso-subsysb</finalName>
 	</build>
 </project>
