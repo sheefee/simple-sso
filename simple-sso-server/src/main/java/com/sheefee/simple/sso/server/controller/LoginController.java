@@ -60,6 +60,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request) {
+		System.out.println(request.getParameter(AuthConst.LOGOUT_REQUEST));
 		HttpSession session = request.getSession();
 		if (session != null) {
 			session.invalidate();

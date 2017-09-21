@@ -39,9 +39,9 @@ public class LogoutFilter implements Filter {
 		// 主动注销，即子系统提供的注销请求
 		if ("/logout".equals(request.getRequestURI())) {
 			// 向认证中心发送注销请求
-//			Map<String, String> params = new HashMap<String, String>();
-//			params.put(AuthConst.LOGOUT_REQUEST, (String) session.getAttribute(AuthConst.TOKEN));
-//			HTTPUtil.post(logoutUrl, params);
+			Map<String, String> params = new HashMap<String, String>();
+			params.put(AuthConst.LOGOUT_REQUEST, (String) session.getAttribute(AuthConst.TOKEN));
+			HTTPUtil.post(logoutUrl, params);
 			// 注销本地会话
 			session.invalidate();
 			response.sendRedirect("/success");
