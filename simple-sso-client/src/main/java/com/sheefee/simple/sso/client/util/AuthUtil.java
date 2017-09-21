@@ -44,7 +44,7 @@ public class AuthUtil {
 			CloseableHttpResponse response = httpclient.execute(httpPost);
 			response.getStatusLine().getStatusCode();
 		} catch (Exception e) {
-			return false;
+			e.printStackTrace();
 		}
 		return true;
 	}

@@ -1,7 +1,6 @@
 package com.sheefee.simple.sso.server.filter;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -14,9 +13,14 @@ import javax.servlet.http.HttpSession;
 
 import com.sheefee.simple.sso.client.constant.AuthConst;
 
+/**
+ * sso认证中心会话过滤
+ * 
+ * @author sheefee
+ * @since 2017年9月21日 下午9:54:15
+ */
 public class AuthFilter implements Filter{
-	public void destroy() {
-	}
+	public void destroy() {}
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
@@ -24,8 +28,13 @@ public class AuthFilter implements Filter{
 		HttpSession session = request.getSession();
 		
 		String uri = request.getRequestURI();
+		// 注销请求，放行
+		if ("/logout".equals(uri)) {
+			chain.doFilter(req, res);
+			return;
+		}
 		
-		// 已经登录，放行，实际上，登录后，只能访问success页面
+		// 已经登录，放行
 		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
 			if (!"/success".equals(uri)) {
 				response.sendRedirect("/success");
@@ -44,6 +53,5 @@ public class AuthFilter implements Filter{
 		response.sendRedirect("/");
 	}
 
-	public void init(FilterConfig config) throws ServletException {
-	}
+	public void init(FilterConfig config) throws ServletException {}
 }
