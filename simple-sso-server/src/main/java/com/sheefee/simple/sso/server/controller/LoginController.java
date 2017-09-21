@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sheefee.simple.sso.client.constant.AuthConst;
 
 /**
- * 登录和授权控制器
+ * 登录和注销控制器
  * 
  * @author sheefee
  * @date 2017年9月12日 下午2:09:47
