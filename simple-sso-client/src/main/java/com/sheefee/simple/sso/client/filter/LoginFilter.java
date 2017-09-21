@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sheefee.simple.sso.client.constant.AuthConst;
+import com.sheefee.simple.sso.client.single.SessionStorage;
 
 /**
  * sso客户端系统会话过滤
@@ -42,6 +43,8 @@ public class LoginFilter implements Filter {
 		if (token != null) {
 			session.setAttribute(AuthConst.IS_LOGIN, true);
 			session.setAttribute(AuthConst.TOKEN, token);
+			// 保存token与session关联关系
+			SessionStorage.INSTANCE.set(token, session);
 			chain.doFilter(req, res);
 			return;
 		}

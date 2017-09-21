@@ -12,6 +12,8 @@ public interface AuthConst {
 	public static String IS_LOGIN = "isLogin";
 	// 登录中心url
 	public static String LOGIN_URL = "loginUrl";
+	// 注销url
+	public static String LOGOUT_URL = "logoutUrl";
 	// 客户端url
 	public static String CLIENT_URL = "clientUrl";
 	// 授权令牌

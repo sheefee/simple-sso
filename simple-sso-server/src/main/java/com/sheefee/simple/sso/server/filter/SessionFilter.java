@@ -28,6 +28,12 @@ public class SessionFilter implements Filter{
 		HttpSession session = request.getSession();
 		String uri = request.getRequestURI();
 		
+		// 注销请求，放行
+		if ("/logout".equals(uri)) {
+			chain.doFilter(req, res);
+			return;
+		}
+		
 		// 已经登录，放行
 		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
 			// 如果是客户端发起的登录请求，跳转回客户端，并附带token

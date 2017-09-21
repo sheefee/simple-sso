@@ -1,2 +1,2 @@
 Protected Resource Page!
-<a href="/test?logoutRequest=${token!}">Logout</a>
+<a href="/logout">Logout</a>
