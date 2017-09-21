@@ -23,15 +23,19 @@ public class AuthFilter implements Filter{
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
 		
-		// 登录请求，放行
 		String uri = request.getRequestURI();
-		if ("/".equals(uri) || "/login".equals(uri)) {
+		
+		// 已经登录，放行，实际上，登录后，只能访问success页面
+		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
+			if (!"/success".equals(uri)) {
+				response.sendRedirect("/success");
+				return;
+			}
 			chain.doFilter(req, res);
 			return;
 		}
-		
-		// 已登录，放行
-		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
+		// 登录请求，放行
+		if ("/".equals(uri) || "/login".equals(uri)) {
 			chain.doFilter(req, res);
 			return;
 		}

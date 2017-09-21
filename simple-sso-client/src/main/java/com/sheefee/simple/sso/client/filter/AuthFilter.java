@@ -42,15 +42,18 @@ public class AuthFilter implements Filter {
 		if (request.getParameter(AuthConst.LOGOUT_REQUEST) != null) {
 			HttpSession activeSession = map.get(request.getParameter(AuthConst.LOGOUT_REQUEST));
 			String token = (String) activeSession.getAttribute(AuthConst.TOKEN);
+			// 注销本地会话
+			if (activeSession != null) {
+				activeSession.removeAttribute(AuthConst.IS_LOGIN);
+			}
 			// 请求认证中心注销
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(AuthConst.TOKEN, token);
 			params.put(AuthConst.LOGOUT_REQUEST, AuthConst.LOGOUT_REQUEST);
 			AuthUtil.post(config.getInitParameter(AuthConst.LOGIN_URL), params);
-			// 注销本地会话
-			if (activeSession != null) {
-				activeSession.invalidate();
-			}
+			// 重定向
+			response.sendRedirect("/test");
+			return;
 		}
 		
 		// 已登录，放行
@@ -63,6 +66,7 @@ public class AuthFilter implements Filter {
 		if (token != null) {
 			// 将局部会话标记为“已登录”
 			session.setAttribute(AuthConst.IS_LOGIN, true);
+			session.setAttribute(AuthConst.TOKEN, token);
 			// 保存局部会话与token的对应关系
 			map.put(token, session);
 			
