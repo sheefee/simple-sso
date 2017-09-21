@@ -8,7 +8,7 @@
 				username:<input type="text" name="username" value="sheefee" />
 				password:<input type="password" name="password" value="123456" />
 				<input type="hidden" name="clientUrl" value="${clientUrl!}" />
-				<input type="submit" value="login" />
+				<input type="submit" value="Login" />
 			</form>
 		</div>
 	</body>
