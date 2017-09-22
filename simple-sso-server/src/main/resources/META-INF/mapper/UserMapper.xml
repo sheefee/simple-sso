@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sheefee.simple.sso.server.dao.UserDao">
+	<resultMap id="resultMap" type="com.sheefee.simple.sso.client.domain.User">
+		<result property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+	</resultMap>
+	
+	<select id="find" parameterType="com.sheefee.simple.sso.client.domain.User" resultMap="resultMap">
+		SELECT
+			id AS id,
+			username AS username,
+			password AS password
+		FROM user
+		WHERE username=#{username} AND password=#{password}
+		LIMIT 1
+	</select>
+	
+	<select id="findbak" parameterType="com.sheefee.simple.sso.client.domain.User" resultMap="resultMap">
+		SELECT
+			${db.table.id} AS id,
+			${db.table.username} AS username,
+			${db.table.password} AS password
+		FROM ${db.table}
+		WHERE ${db.table.username}=#{username} AND ${db.table.password}=#{password}
+		LIMIT 1
+	</select>
+	
+</mapper>

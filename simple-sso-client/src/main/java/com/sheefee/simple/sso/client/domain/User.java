@@ -8,16 +8,12 @@ package com.sheefee.simple.sso.client.domain;
  *
  */
 public class User {
-	// 用户id
+	// id
 	private String id;
 	// 名称
 	private String username;
 	// 密码
 	private String password;
-	// 昵称
-	private String nickname;
-	// 个人信息等
-	private String profile;
 
 	public String getId() {
 		return id;
@@ -43,19 +39,4 @@ public class User {
 		this.password = password;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getProfile() {
-		return profile;
-	}
-
-	public void setProfile(String profile) {
-		this.profile = profile;
-	}
 }

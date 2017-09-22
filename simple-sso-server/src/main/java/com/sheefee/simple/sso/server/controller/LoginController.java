@@ -8,13 +8,16 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sheefee.simple.sso.client.constant.AuthConst;
+import com.sheefee.simple.sso.client.domain.User;
 import com.sheefee.simple.sso.client.storage.SessionStorage;
 import com.sheefee.simple.sso.client.util.HTTPUtil;
+import com.sheefee.simple.sso.server.service.UserService;
 import com.sheefee.simple.sso.server.storage.ClientStorage;
 
 /**
@@ -26,6 +29,9 @@ import com.sheefee.simple.sso.server.storage.ClientStorage;
  */
 @Controller
 public class LoginController {
+	@Autowired
+	private UserService userService;
+	
 	/**
 	 * 登录
 	 * 
@@ -36,10 +42,11 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping("/login")
-	public String login(HttpServletRequest request, Model model) {
+	public String login(HttpServletRequest request, User input, Model model) {
 		// 验证用户
-		if (!"sheefee".equals(request.getParameter("username"))) {
-			model.addAttribute("error", "user not exist.");
+		User user = userService.find(input);
+		if (user == null) {
+			model.addAttribute("error", "username or password is wrong.");
 			return "redirect:/";
 		}
 
