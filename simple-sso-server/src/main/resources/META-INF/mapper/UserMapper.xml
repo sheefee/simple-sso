@@ -9,23 +9,13 @@
 		<result property="password" column="password" />
 	</resultMap>
 	
-	<select id="find" parameterType="com.sheefee.simple.sso.client.domain.User" resultMap="resultMap">
+	<select id="find" parameterType="java.util.Map" resultMap="resultMap">
 		SELECT
-			id AS id,
-			username AS username,
-			password AS password
-		FROM user
-		WHERE username=#{username} AND password=#{password}
-		LIMIT 1
-	</select>
-	
-	<select id="findbak" parameterType="com.sheefee.simple.sso.client.domain.User" resultMap="resultMap">
-		SELECT
-			${db.table.id} AS id,
-			${db.table.username} AS username,
-			${db.table.password} AS password
-		FROM ${db.table}
-		WHERE ${db.table.username}=#{username} AND ${db.table.password}=#{password}
+			${userid} AS id,
+			${username} AS username,
+			${password} AS password
+		FROM ${table}
+		WHERE ${username} = #{user.username} AND ${password} = #{user.password}
 		LIMIT 1
 	</select>
 	
