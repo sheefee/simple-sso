@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sheefee.simple.sso.client.constant.AuthConst;
+import com.sheefee.simple.sso.server.storage.ClientStorage;
 
 /**
  * sso认证中心会话过滤
@@ -38,8 +39,11 @@ public class SessionFilter implements Filter{
 		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
 			// 如果是客户端发起的登录请求，跳转回客户端，并附带token
 			String clientUrl = request.getParameter(AuthConst.CLIENT_URL);
+			String token = (String) session.getAttribute(AuthConst.TOKEN);
 			if (clientUrl != null && !"".equals(clientUrl)) {
-				response.sendRedirect(clientUrl + "?" + AuthConst.TOKEN + "=" + session.getAttribute(AuthConst.TOKEN));
+				// 存储，用于注销
+				ClientStorage.INSTANCE.set(token, clientUrl);
+				response.sendRedirect(clientUrl + "?" + AuthConst.TOKEN + "=" + token);
 				return;
 			}
 			if (!"/success".equals(uri)) {

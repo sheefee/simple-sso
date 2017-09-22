@@ -4,17 +4,31 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<display-name>simple-sso-subsysb</display-name>
-
+	
 	<filter>
-		<filter-name>AuthFilter</filter-name>
+		<filter-name>LogoutFilter</filter-name>
+		<filter-class>com.sheefee.simple.sso.client.filter.LogoutFilter</filter-class>
+		<init-param>
+			<param-name>logoutUrl</param-name>
+			<param-value>http://sheefee.com:8080/logout</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>LoginFilter</filter-name>
 		<filter-class>com.sheefee.simple.sso.client.filter.LoginFilter</filter-class>
 		<init-param>
 			<param-name>loginUrl</param-name>
 			<param-value>http://sheefee.com:8080</param-value>
 		</init-param>
 	</filter>
+	
 	<filter-mapping>
-		<filter-name>AuthFilter</filter-name>
+		<filter-name>LogoutFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	

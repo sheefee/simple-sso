@@ -1,4 +1,4 @@
-package com.sheefee.simple.sso.client.single;
+package com.sheefee.simple.sso.client.storage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,9 @@ public enum SessionStorage {
 	}
 	
 	public HttpSession get(String token) {
-		return map.remove(token);
+		if (map.containsKey(token)) {
+			return map.remove(token);
+		}
+		return null;
 	}
 }
