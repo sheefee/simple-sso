@@ -12,8 +12,7 @@
 	<select id="find" parameterType="java.util.Map" resultMap="resultMap">
 		SELECT
 			${userid} AS id,
-			${username} AS username,
-			${password} AS password
+			${username} AS username
 		FROM ${table}
 		WHERE ${username} = #{user.username} AND ${password} = #{user.password}
 		LIMIT 1
