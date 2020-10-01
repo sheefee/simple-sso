@@ -1,2 +1,6 @@
 ### 0.1版本完成：用最简单的方式实现单点登录逻辑，请查看0.1分支
 ### 0.2版本开始...
+### in english
+### 0.1 Version completed: the simplest way to achieve single sign-on logic, please check the 0.1 branch
+
+###0.2 The version begins...
